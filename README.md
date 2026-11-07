@@ -1,6 +1,6 @@
 # siteblock
 
-A free, open-source site blocker for macOS. It blocks adult, gambling, crypto, scam, malware, and phishing sites, plus any domains you add yourself (TeraBox, DiskWala, and so on).
+A free, open-source site blocker for macOS and Windows. It blocks adult, gambling, crypto, scam, malware, and phishing sites, plus any domains you add yourself (TeraBox, DiskWala, and so on).
 
 It works at the system level, so the blocks apply in **every browser** (Safari, Chrome, Firefox, Brave, Arc, Edge) and in other apps too. There is no extension to install and no account to create.
 
@@ -35,6 +35,29 @@ Then turn off the browser settings that skip your system DNS:
 - **Safari:** turn off iCloud Private Relay
 
 Finally, quit every browser with Cmd+Q and open it again.
+
+## Windows
+
+Windows 11 is needed for encrypted DNS. On Windows 10 the hosts-file blocks still work.
+
+1. Download the repo (**Code → Download ZIP**) and unzip it.
+2. Right-click **Start → Terminal (Admin)**, then run this in the unzipped folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\siteblock.ps1 install
+```
+
+This blocks the lists in the hosts file and sets encrypted family DNS on every active network adapter. A scheduled task refreshes the lists daily and at startup.
+
+To block more sites, edit `custom.txt` and run `install` again. To remove everything:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\siteblock.ps1 uninstall
+```
+
+Turn off "secure DNS" in your browsers the same way as on Mac (see above). If Microsoft Defender warns about a hosts file change, choose **Allow on device**.
+
+The Windows version has been tested for its block-list logic only. The DNS and scheduled-task parts have not yet been tested on a real Windows PC, so please report any problems.
 
 ## Block more sites
 

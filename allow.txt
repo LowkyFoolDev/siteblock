@@ -1,0 +1,2 @@
+# Domains to let through even if the family DNS filter blocks them. One per line.
+hianime.at

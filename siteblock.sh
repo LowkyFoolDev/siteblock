@@ -33,6 +33,15 @@ update_hosts() {
       d="${d#www.}"; echo "0.0.0.0 $d"; echo "0.0.0.0 www.$d"
     done
   } | sort -u -k2,2 > "$tmp.body"
+  # allow.txt: pin real IPs (looked up via unfiltered DoH) so the family DNS filter is skipped for these
+  local A; A="$(dirname "$1")/allow.txt"
+  [ -f "$A" ] && grep -v '^\s*#' "$A" | tr -d ' \r' | grep . | while read -r d; do
+    d="${d#www.}"
+    for h in "$d" "www.$d"; do
+      curl -fsS --max-time 10 -H 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$h&type=A" \
+        | grep -o '"data":"[0-9.]*"' | head -1 | cut -d'"' -f4 | sed "s/\$/ $h/" || true
+    done
+  done >> "$tmp.body"
   [ -s "$tmp.body" ] || { echo "Block list empty, hosts not changed."; exit 1; }
   { strip_block "$HOSTS"; echo "$BEGIN"; cat "$tmp.body"; echo "$END"; } > "$tmp"
   cat "$tmp" > "$HOSTS"   # cat keeps file owner/permissions
@@ -51,7 +60,7 @@ case "${1:-}" in
   install)
     need_root
     mkdir -p "$HOME_DIR"
-    cp "$SRC_DIR/siteblock.sh" "$SRC_DIR/custom.txt" "$HOME_DIR/"
+    cp "$SRC_DIR/siteblock.sh" "$SRC_DIR/custom.txt" "$SRC_DIR/allow.txt" "$HOME_DIR/"
     chmod 755 "$HOME_DIR/siteblock.sh"
     update_hosts "$HOME_DIR/custom.txt"
     set_dns $DNS4 $DNS6

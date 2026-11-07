@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key><string>HTTPS</string>
+        <key>ServerURL</key><string>https://family.cloudflare-dns.com/dns-query</string>
+        <key>ServerAddresses</key>
+        <array>
+          <string>1.1.1.3</string><string>1.0.0.3</string>
+          <string>2606:4700:4700::1113</string><string>2606:4700:4700::1003</string>
+        </array>
+      </dict>
+      <key>PayloadDisplayName</key><string>Family DNS (encrypted)</string>
+      <key>PayloadIdentifier</key><string>com.siteblock.dns.B76DE06A-A619-48D4-8B55-14D2DFD5991E</string>
+      <key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
+      <key>PayloadUUID</key><string>B76DE06A-A619-48D4-8B55-14D2DFD5991E</string>
+      <key>PayloadVersion</key><integer>1</integer>
+    </dict>
+  </array>
+  <key>PayloadDisplayName</key><string>Siteblock Family DNS</string>
+  <key>PayloadDescription</key><string>Encrypted Cloudflare for Families DNS: blocks adult and malware sites.</string>
+  <key>PayloadIdentifier</key><string>com.siteblock.profile</string>
+  <key>PayloadScope</key><string>System</string>
+  <key>PayloadType</key><string>Configuration</string>
+  <key>PayloadUUID</key><string>F100CF88-2FA6-4D43-B0C0-8C9CAD6730CE</string>
+  <key>PayloadVersion</key><integer>1</integer>
+</dict>
+</plist>

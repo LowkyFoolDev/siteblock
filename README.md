@@ -1,6 +1,6 @@
 # siteblock
 
-A free, open-source site blocker for macOS. It blocks adult, crypto, scam, malware, and phishing sites, plus any domains you add yourself (TeraBox, DiskWala, and so on).
+A free, open-source site blocker for macOS. It blocks adult, gambling, crypto, scam, malware, and phishing sites, plus any domains you add yourself (TeraBox, DiskWala, and so on).
 
 It works at the system level, so the blocks apply in **every browser** (Safari, Chrome, Firefox, Brave, Arc, Edge) and in other apps too. There is no extension to install and no account to create.
 
@@ -8,7 +8,7 @@ It works at the system level, so the blocks apply in **every browser** (Safari, 
 
 | Layer | What it blocks | How |
 |---|---|---|
-| `/etc/hosts` | Crypto (~1.3k) and scam (~8.5k) domains, and everything in `custom.txt` | Points each domain to `0.0.0.0` |
+| `/etc/hosts` | Crypto (~1.3k), scam (~8.5k), gambling (~6.7k) domains, and everything in `custom.txt` | Points each domain to `0.0.0.0` |
 | `FamilyDNS.mobileconfig` | Adult and malware/phishing sites, including new ones | Encrypted DNS (DoH) to [Cloudflare for Families](https://one.one.one.one/family/) |
 | Daily refresh | Keeps the lists up to date | A `launchd` job runs `siteblock.sh update` once a day |
 
@@ -61,6 +61,7 @@ Then remove the profile in **System Settings → General → Device Management**
 ## Block list sources
 
 - [The Block List Project](https://github.com/blocklistproject/Lists): crypto, scam
+- [StevenBlack/hosts](https://github.com/StevenBlack/hosts): gambling
 - [Cloudflare for Families](https://one.one.one.one/family/): adult, malware
 
 ## License

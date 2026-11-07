@@ -1,6 +1,6 @@
 #!/bin/bash
 # siteblock: system-wide site blocker for macOS (works in every browser).
-# Layer 1: /etc/hosts  -> crypto, scam lists + custom.txt (TeraBox, DiskWala, ...)
+# Layer 1: /etc/hosts  -> crypto, scam, gambling lists + custom.txt (TeraBox, DiskWala, ...)
 # Layer 2: DNS 1.1.1.3 (Cloudflare for Families) -> adult + malware/phishing sites
 # Usage: sudo ./siteblock.sh install | update | uninstall
 set -euo pipefail
@@ -11,7 +11,8 @@ PLIST=/Library/LaunchDaemons/com.siteblock.update.plist
 BEGIN="# >>> siteblock BEGIN"
 END="# <<< siteblock END"
 LISTS="https://blocklistproject.github.io/Lists/crypto.txt
-https://blocklistproject.github.io/Lists/scam.txt"
+https://blocklistproject.github.io/Lists/scam.txt
+https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-only/hosts"
 DNS4="1.1.1.3 1.0.0.3"
 DNS6="2606:4700:4700::1113 2606:4700:4700::1003"
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
